@@ -1,23 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function Section() {
+function Section({title, description, backgroundImg, leftButtonTxt,rightButtonTxt, downArrow}) {
   return (
-    <Wrap>
+    <Wrap bgImage={backgroundImg}>
         <ItemText>
-            <h1>Model S</h1>
-            <p>Order Online for touchless delivery</p>
+            <h1>{title}</h1>
+            <p>{description}</p>
         </ItemText>
         <Button>
             <ButtonGroup>
                 <LeftButton>
-                    Custom Order
+                {leftButtonTxt}
                 </LeftButton>
-                <RightButton>
-                    Existing Inventory
+                {rightButtonTxt &&
+                    <RightButton>
+                    {rightButtonTxt}
                 </RightButton>
+                }
             </ButtonGroup>
-            <DownArrow src="/images/down-arrow.svg"/>
+            {downArrow &&
+            <DownArrow src="/images/down-arrow.svg"/>   
+            }
         </Button>
     </Wrap>
   )
@@ -28,7 +32,7 @@ export default Section
 const Wrap = styled.div`
     width: 100vw ;
     height : 100vh;
-    background-image: url('/images/model-s.jpg');
+    // background-image: url('/images/model-s.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -36,6 +40,7 @@ const Wrap = styled.div`
     flex-direction: column;
     justify-content: space-between; //vertical
     align-items : center;
+    background-image: ${props => `url("/images/${props.bgImage}")`};
 `
 
 const ItemText = styled.div`
@@ -46,6 +51,10 @@ const ItemText = styled.div`
 const ButtonGroup = styled.div`
     display: flex;
     margin-bottom: 30px;
+    @media (max-width: 768px)
+    {
+        flex-direction: column;
+    }
 `
 
 const LeftButton = styled.div`
