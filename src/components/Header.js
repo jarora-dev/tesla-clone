@@ -1,11 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@mui/icons-material/Menu'
- 
+import { Fade } from "react-awesome-reveal";
+
 
 function Header() {
   return (
     <Container>
+      <Fade triggerOnce="true">
+
         <Logo>
           <img src="/images/logo.svg"/>
         </Logo>
@@ -20,6 +23,7 @@ function Header() {
           <a class="menu" href="#">Account</a>
           <CustomMenu/>
         </RightMenu>
+      </Fade>
 
     </Container>
   )
