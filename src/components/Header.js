@@ -3,10 +3,14 @@ import styled from 'styled-components'
 import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close';
 import { Fade } from "react-awesome-reveal";
+import {selectCars} from '../features/car/carSlice'
+import { useSelector } from 'react-redux';
 
 
 function Header() {
   const[burgerStatus, setBurgerStatus] = useState(false);
+  const cars = useSelector(selectCars);
+  console.log(cars);
   return (
     <Container>
       <Fade triggerOnce="true">
@@ -15,10 +19,10 @@ function Header() {
             <img src="/images/logo.svg"/>
           </Logo>
           <Menu>
-            <a class="menu" href="#">Model S</a>
-            <a class="menu" href="#">Model Y</a>
-            <a class="menu" href="#">Model 3</a>
-            <a class="menu" href="#">Model X</a>
+            {cars && cars.map((car,index)=>(
+              <a class="menu" key={index} href="#">{car}</a>
+
+            ))}
           </Menu>
           <RightMenu>
             <a class="menu" href="#">Shop</a>
@@ -32,15 +36,15 @@ function Header() {
             <CloseWrapper>
               <CustomClose onClick={()=>setBurgerStatus(false)}/>
             </CloseWrapper>
+            {cars && cars.map((car,index)=>(
+              <li><a key={index} href="#">{car}</a></li>
+            ))}
             <li><a href="#">Existing Inventory</a></li>
             <li><a href="#">Used Inventory</a></li>
             <li><a href="#">Trade-in</a></li>
             <li><a href="#">Cybertruck</a></li>
             <li><a href="#">Roadster</a></li>
-            <li><a href="#">Existing Inventory</a></li>
           </BurgerNav>
-        
-
       </Fade>
 
     </Container>
@@ -90,7 +94,7 @@ const Menu = styled.div`
   a{
     font-weight: 600;
     text-transform: uppercase;
-    padding:15px;
+    padding:20px;
     text-decoration: none;
     vertical-align: middle;
 
@@ -106,6 +110,7 @@ const Menu = styled.div`
 const RightMenu = styled.div`
   display: flex;
   align-items: center;
+  // padding: 20px;
   a{
     font-weight: 600;
     text-transform: uppercase;
@@ -117,6 +122,7 @@ const RightMenu = styled.div`
 
 const CustomMenu = styled(MenuIcon)`
   cursor: pointer;
+  
 `
 
 const BurgerNav = styled.div`
@@ -148,6 +154,7 @@ const BurgerNav = styled.div`
 
 const CustomClose = styled(CloseIcon)`
   cursor: pointer;
+  margin: 20px 5px;
 `
 
 const CloseWrapper = styled.div`
