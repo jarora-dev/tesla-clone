@@ -52,6 +52,7 @@ const Wrap = styled.div`
     justify-content: space-between; //vertical
     align-items : center;
     background-image: ${props => `url("/images/${props.bgImage}")`};
+    
 `
 
 const ItemText = styled.div`
